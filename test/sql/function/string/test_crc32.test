@@ -1,4 +1,4 @@
-# name: test/sql/function/string/crc32.test
+# name: test/sql/function/string/test_crc32.test
 # description: Test the crc32 function
 # group: [string]
 
