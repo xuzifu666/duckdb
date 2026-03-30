@@ -40,7 +40,7 @@ static const uint32_t my_crc32_table[256] = {
 static uint32_t my_crc32(const char *data, size_t length) {
        uint32_t crc = 0xFFFFFFFF;
        for (size_t i = 0; i < length; ++i) {
-           crc = my_crc32_table[(crc ^ data[i]) & 0xFF] ^ (crc >> 8);
+               crc = my_crc32_table[(crc ^ data[i]) & 0xFF] ^ (crc >> 8);
        }
        return crc ^ 0xFFFFFFFF;
 }
