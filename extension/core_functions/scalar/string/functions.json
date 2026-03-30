@@ -408,5 +408,24 @@
         "example": "url_decode('https%3A%2F%2Fduckdb.org%2Fwhy_duckdb%23portable')",
         "categories": ["string"],
         "type": "scalar_function"
+    },
+    {
+        "name": "crc32",
+        "variants": [
+            {
+                "parameters": [{"name": "string", "type": "VARCHAR"}],
+                "description": "Returns the CRC32 checksum of the `string` as an unsigned integer.",
+                "example": "crc32('hello')",
+                "categories": ["string"]
+            },
+            {
+                "parameters": [{"name": "blob", "type": "BLOB"}],
+                "description": "Returns the CRC32 checksum of the `blob` as an unsigned integer.",
+                "example": "crc32('\\xAA\\xBB'::BLOB)",
+                "categories": ["blob"]
+            }
+        ],
+        "type": "scalar_function_set",
+        "struct": "CRC32Fun"
     }
 ]

@@ -491,4 +491,14 @@ struct UrlDecodeFun {
 	static ScalarFunction GetFunction();
 };
 
+struct CRC32Fun {
+	static constexpr const char *Name = "crc32";
+	static constexpr const char *Parameters = "string::VARCHAR\001blob::BLOB";
+	static constexpr const char *Description = "Returns the CRC32 checksum of the `string` as an unsigned integer.\001Returns the CRC32 checksum of the `blob` as an unsigned integer.";
+	static constexpr const char *Example = "crc32('hello')\001crc32('\\xAA\\xBB'::BLOB)";
+	static constexpr const char *Categories = "string\001blob";
+
+	static ScalarFunctionSet GetFunctions();
+};
+
 } // namespace duckdb

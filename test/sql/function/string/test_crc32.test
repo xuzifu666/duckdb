@@ -1,0 +1,62 @@
+# name: test/sql/function/string/crc32.test
+# description: Test the crc32 function
+# group: [string]
+
+statement ok
+PRAGMA enable_verification
+
+query II
+select crc32('hello'), crc32(NULL)
+----
+907060870
+NULL
+
+query I
+select crc32('')
+----
+0
+
+query I
+select crc32('\xff\xff'::BLOB)
+----
+4294901760
+
+query I
+select crc32('The quick brown fox jumps over the lazy dog')
+----
+1095738169
+
+statement ok
+CREATE TABLE strings AS SELECT s::VARCHAR s FROM generate_series(0,10,1) t(s)
+
+query II
+select crc32(s), crc32('1') from strings ORDER BY s
+----
+4108050209	2212294583
+2212294583	2212294583
+2707236321	2212294583
+450215437	2212294583
+1842515611	2212294583
+4088798008	2212294583
+2226203566	2212294583
+498629140	2212294583
+1790921346	2212294583
+4194326291	2212294583
+2366072709	2212294583
+
+query II
+select crc32(s), crc32('1') from strings where s::INTEGER BETWEEN 1 AND 3 ORDER BY s
+----
+2212294583	2212294583
+450215437	2212294583
+1842515611	2212294583
+
+statement error
+SELECT crc32()
+----
+<REGEX>:.*Binder Error: No function matches.*
+
+statement error
+SELECT crc32('hello', 'world')
+----
+<REGEX>:.*Binder Error: No function matches.*
