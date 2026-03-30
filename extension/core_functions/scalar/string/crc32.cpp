@@ -61,11 +61,11 @@ void MyCRC32Function(DataChunk &args, ExpressionState &state, Vector &result) {
 
 } // namespace
 
-ScalarFunctionSet CRC32Fun::GetFunctions() {
+} // namespace duckdb
+
+ScalarFunctionSet duckdb::CRC32Fun::GetFunctions() {
 	ScalarFunctionSet set("crc32");
 	set.AddFunction(ScalarFunction({LogicalType::VARCHAR}, LogicalType::UINTEGER, MyCRC32Function));
 	set.AddFunction(ScalarFunction({LogicalType::BLOB}, LogicalType::UINTEGER, MyCRC32Function));
 	return set;
 }
-
-} // namespace duckdb
