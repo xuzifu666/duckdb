@@ -38,11 +38,11 @@ static const uint32_t my_crc32_table[256] = {
     0xb40bbe37, 0xc30c8ea1, 0x5a05df1b, 0x2d02ef8d};
 
 static uint32_t my_crc32(const char *data, size_t length) {
-	   uint32_t crc = 0xFFFFFFFF;
-	   for (size_t i = 0; i < length; ++i) {
-	   	       crc = my_crc32_table[(crc ^ data[i]) & 0xFF] ^ (crc >> 8);
-	   }
-	   return crc ^ 0xFFFFFFFF;
+	uint32_t crc = 0xFFFFFFFF;
+	for (size_t i = 0; i < length; ++i) {
+		crc = my_crc32_table[(crc ^ data[i]) & 0xFF] ^ (crc >> 8);
+	}
+	return crc ^ 0xFFFFFFFF;
 }
 
 struct CRC32Operator {
